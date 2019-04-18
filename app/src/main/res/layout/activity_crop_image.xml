@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout  xmlns:android="http://schemas.android.com/apk/res/android">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color01">
+        <RelativeLayout
+            android:id="@+id/actionbar_frame"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp">
+
+            <RelativeLayout
+                android:id="@+id/btn_done"
+                android:layout_width="48dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="26dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+
+                    android:text="완료"
+                    android:textColor="@color/color02"
+                    android:textSize="23dp"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:src="@drawable/crop_image_menu_rotate_left"
+                android:layout_marginLeft="16dp"
+                android:layout_centerVertical="true"/>
+
+            <!--<RelativeLayout-->
+            <!--android:layout_width="48dp"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:layout_marginLeft="16dp"-->
+            <!--android:gravity="center"-->
+            <!--android:background="@drawable/btn_actionbar_white_selector">-->
+
+            <!--<TextView-->
+            <!--android:id="@+id/btn_cancel"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textSize="13dp"-->
+            <!--android:includeFontPadding="false"-->
+            <!--android:textColor="@color/color02"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:src="@drawable/btn_actionbar_white_selector"-->
+            <!--android:text="@string/alert_cancel"/>-->
+
+            <!--</RelativeLayout>-->
+        </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/actionbar_frame"
+            android:background="@color/color02">
+
+
+            <com.theartofdev.edmodo.cropper.CropImageView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cropImageView_oval"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color01"
+                android:visibility="gone"
+                custom:cropBackgroundColor="@color/color_7f000000"
+                custom:cropInitialCropWindowPaddingRatio="0.038"
+                custom:cropGuidelines="off"
+                custom:cropShape="oval"
+                custom:cropBorderLineColor="@android:color/transparent"
+                custom:cropBorderCornerColor="@color/color_transparent"
+                custom:cropBorderLineThickness="1px"/>
+
+
+            <com.theartofdev.edmodo.cropper.CropImageView
+                xmlns:custom="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cropImageView_rectangle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/color01"
+                android:visibility="gone"
+                custom:cropBackgroundColor="@color/color_7f000000"
+                custom:cropInitialCropWindowPaddingRatio="0.077"
+                custom:cropGuidelines="off"
+                custom:cropShape="rectangle"
+                custom:cropBorderLineColor="@android:color/transparent"
+                custom:cropBorderCornerColor="@color/color_transparent"
+                custom:cropBorderLineThickness="1px" />
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

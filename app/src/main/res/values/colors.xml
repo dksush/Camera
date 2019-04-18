@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--<color name="colorPrimary">#008577</color>-->
+    <!--<color name="colorPrimaryDark">#00574B</color>-->
+    <!--<color name="colorAccent">#D81B60</color>-->
+    <!--<color name="colorPrimary">#3F51B5</color>-->
+    <!--<color name="colorPrimaryDark">#303F9F</color>-->
+    <!--<color name="colorAccent">#4b00ef</color>-->
+    <color name="color_transparent">#00000000</color>
+
+    <color name="color_0DFFFFFF">#0DFFFFFF</color> <!--- opacity 5%-->
+    <color name="color_1AFFFFFF">#1AFFFFFF</color> <!--- opacity 10%-->
+    <color name="color_1FFFFFFF">#1FFFFFFF</color> <!--- opacity 12%-->
+    <color name="color_26FFFFFF">#26FFFFFF</color> <!--- opacity 15%-->
+    <color name="color_2EFFFFFF">#2EFFFFFF</color> <!--- opacity 18%-->
+    <color name="color_33FFFFFF">#33FFFFFF</color> <!--- opacity 20%-->
+    <color name="color_38FFFFFF">#38FFFFFF</color> <!--- opacity 22%-->
+    <color name="color_4DFFFFFF">#4DFFFFFF</color> <!--- opacity 30%-->
+    <color name="color_54FFFFFF">#54FFFFFF</color> <!--- opacity 33%-->
+    <color name="color_66FFFFFF">#66FFFFFF</color> <!--- opacity 40%-->
+    <color name="color_80FFFFFF">#80FFFFFF</color> <!--- opacity 50%-->
+    <color name="color_99FFFFFF">#99FFFFFF</color> <!--- opacity 60%-->
+    <color name="color_A8FFFFFF">#A8FFFFFF</color> <!--- opacity 66%-->
+    <color name="color_B2FFFFFF">#B2FFFFFF</color>
+    <color name="color_CCFFFFFF">#CCFFFFFF</color> <!--- opacity 80%-->
+    <color name="color_D6FFFFFF">#D6FFFFFF</color> <!--- opacity 84%-->
+
+    <color name="color_A8000000">#A8000000</color> <!--- opacity 66%-->
+
+    <color name="color_1A333333">#1A333333</color> <!--- opacity 10%-->
+
+    <color name="color_A84b00ef">#A84b00ef</color> <!--- opacity 66%-->
+    <color name="color_544b00ef">#544b00ef</color>
+
+    <color name="color_666666">#666666</color>
+    <color name="color_80000000">#80000000</color>
+    <color name="color_FF72EC">#FF72EC</color>
+    <color name="color_A8666666">#A8666666</color>
+
+    <color name="color_c8c8c8">#c8c8c8</color>
+
+    <color name="color01">#000000</color>
+    <color name="color02">#FFFFFF</color>
+    <color name="color03">#333333</color>
+
+    <color name="color_4b00ef">#4b00ef</color>
+    <color name="color_ff6f61">#ff6f61</color> <!--salmon-->
+    <color name="color_33ff6f61">#33ff6f61</color> <!--- opacity 20%-->
+    <color name="color_80ff6f61">#80ff6f61</color> <!--- opacity 50%-->
+    <color name="color_24c6cc">#24c6cc</color>
+    <color name="color_ffdfdd">#ffdfdd</color>
+    <color name="color_333333">#333333</color>
+    <color name="color_eeeeee">#eeeeee</color>
+    <color name="color_cccccc">#cccccc</color>
+    <color name="color_25c6cc">#25c6cc</color>
+    <color name="color_19c6cc">#19c6cc</color>
+
+    <color name="color_222222">#222222</color>
+
+    <color name="color_dddddd">#dddddd</color>
+
+    <color name="color_54333333">#54333333</color>
+    <color name="color_888888">#888888</color>
+    <color name="color_247c7c7c">#247c7c7c</color>
+    <color name="color_b3ffffff">#b3ffffff</color>
+    <color name="color_A8333333">#A8333333</color> <!--- opacity 10%-->
+    <color name="color_4cffffff">#4CFFFFFF</color>
+
+
+    <color name="color_0d000000">#0d000000</color>
+    <color name="color_19000000">#19000000</color>
+    <color name="color_99000000">#99000000</color> <!--- opacity 60%-->
+    <color name="color_CC000000">#CC000000</color> <!--- opacity 80%-->
+    <color name="color_0F000000">#0F000000</color>
+    <color name="color_7f000000">#7f000000</color>
+    <color name="color_66000000">#66000000</color>
+    <color name="color_33000000">#33000000</color>
+
+
+    <color name="color_01686A">#01686a</color>
+    <color name="color_06C6C8">#06c6c8</color>
+    <color name="color_7D5B00">#7d5b00</color>
+    <color name="color_999999">#999999</color>
+    <color name="color_f0f5f5">#f0f5f5</color>
+    <color name="color_F4B714">#f4b714</color>
+    <color name="color_ff59ea">#ff59ea</color>
+    <color name="color_f5f5f5">#f5f5f5</color>
+    <color name="color_FF2B2B">#FF2B2B</color>
+
+    <drawable name="drawable_FFFFFF">#ffffff</drawable> <!--- opacity 0%-->
+    <drawable name="drawable_1A4B00EF">#1A4b00ef</drawable> <!--- opacity 10%-->
+    <drawable name="drawable_4B00EF">#4b00ef</drawable> <!--- opacity  0%-->
+    <drawable name="drawable_804B00EF">#804b00ef</drawable> <!--- opacity 50%-->
+    <drawable name="drawable_ff6f61">#ff6f61</drawable> <!--salmon-->
+    <drawable name="drawable_transparent">#00000000</drawable>
+
+    <color name="color_ff7062">#ff7062</color>
+
+</resources>
