@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
 
-    // 카메라 확인용 퍼미션
+    // 카메라 확인용 퍼미션 : 카메라를 선택했을때, 카메라 퍼미션이 허용되있는지 묻는다.
     // 원래 한곳에 전체와 카메라 퍼미션이 있을일은 없지.
     // 그냥 한곳에 때려박다 보니 허허.
     private static final String[] CAMERA_PERMISSIONS = {
@@ -63,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView imageView;
 
 
-    String tempCameraFileName;  // 카메라로 찍은 사진을 임시로 담아둘 경로.
-    private static File mLoaclPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); // 그림파일 저장(카메라로 찍고 갤러리에 저장되지 않은 상태도 반영하는듯?)
+    String tempCameraFileName;  // 카메라로 찍은 사진을 임시로 담아둘 경로 객체.
+    private static File mLoaclPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES); // 외부 저장소 경로 : 카메라로 찍은 사진의 경로값을 받기위해(카메라로 찍은 사진은 일단 외부저장소에 저장된다)
     //File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM); // 사진.
 
     @Override
@@ -73,7 +73,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         imageView = findViewById(R.id.image);
-
         startAfterAuthorityCheck(); // 권한체크.
     }
 
@@ -92,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
 
             try {
-                Intent intent = new Intent(Intent.ACTION_PICK);
-                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE);
+                Intent intent = new Intent(Intent.ACTION_PICK); // 갤러리로 이동.(선택한 데이터를 반환해주는 intent)
+                intent.setType(android.provider.MediaStore.Images.Media.CONTENT_TYPE); // 이미지 타입을 원함.
                 startActivityForResult(intent, READ_REQUEST_LIBRARY);
             } catch( Exception e ) {
                 e.printStackTrace();
@@ -107,13 +106,15 @@ public class MainActivity extends AppCompatActivity {
     public void camera(View view){
         // 카메라 관련 퍼미션이 없으면, 퍼미션 체크하고 리턴을 토해, if 밑에를 수행한다.
         if(!hasPermissionsGranted(CAMERA_PERMISSIONS)){
-           requestEachPermissions(CAMERA_PERMISSIONS,REQUEST_CAMERA_PERMISSIONS); // 여기서 거절하는 놈은 없겟지?
+           requestEachPermissions(CAMERA_PERMISSIONS,REQUEST_CAMERA_PERMISSIONS);
            return;
-
         }
-        tempCameraFileName = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".png"; // 저장할 임시 파일 만들기
-        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // 카메라
-        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, MakeFile(tempCameraFileName)); // 사진파일의 url 지정.
+
+
+
+        tempCameraFileName = "tmp_" + String.valueOf(System.currentTimeMillis()) + ".png"; // 찍은 사진을 담아둘 객체 파일명을 설정한다.
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE); // 카메라로 이동
+        intent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, MakeFile(tempCameraFileName)); // MakeFile 을 통해 해당 사진을 외부에서 접근할 수 있게 허용.EXTRA_OUTPUT 을 이용해 위에서 설정한 파일객체를 실제 사진파일의 url 지정.
         startActivityForResult(intent, READ_REQUEST_CAMERA);
 
         //dialog.dismiss(); // 다이얼로그 같은게 있으면 꺼준다.
@@ -126,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
     // 사용하게 위해
     // 1. 매니페스트 어플리케이션 안쪽에 프로바이더 선언
     // 2. 프로바이더(xml) 경로 설정 ( 카메라로 막 찍은 사진은 '외부저장소' 에 저장된다. )
-    //
+    // 정리하자면 찍은 파일(사진)을 앱 외부(서버) 에 올리기 위해 provider 를 이용해 권한을 부여하는 것.
     private Uri MakeFile(String filename) {
       //  Uri tUri = FileProvider.getUriForFile(this,"com.dingastar.singstealer.provider", new File(mLoaclPath, filename));
         Uri uri = FileProvider.getUriForFile(this, this.getPackageName()+".provider", new File(mLoaclPath, filename));
@@ -153,8 +154,8 @@ public class MainActivity extends AppCompatActivity {
                 if(resultCode == RESULT_OK){
                     // 사진 받아서 크롭으로.
                     Intent intent = new Intent(this, CropImageActivity.class);
-                    intent.putExtra(CropImageActivity.IMAGE_URL_KEY, data.getData().toString());
-                    intent.putExtra(CropImageActivity.JOIN_TYPE, CropImageActivity.TYPE_PAGE_ACCOUNT);
+                    intent.putExtra(CropImageActivity.IMAGE_URL_KEY, data.getData().toString()); // 갤러리서 받은 이미지데이터 보내기.
+                    intent.putExtra(CropImageActivity.JOIN_TYPE, CropImageActivity.TYPE_PAGE_ACCOUNT); // 없어도됨.
                     startActivityForResult(intent, CROP_IMG_REQUEST_CODE);
 
 
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 if (requestCode == RESULT_OK){
                     Intent intent = new Intent(this, CropImageActivity.class);
                     intent.putExtra(CropImageActivity.IMAGE_URL_KEY, "file://" + getFilePath(tempCameraFileName)); // 사진 경로
-                    intent.putExtra(CropImageActivity.JOIN_TYPE, CropImageActivity.TYPE_PAGE_ACCOUNT_CAMERA);
+                    intent.putExtra(CropImageActivity.JOIN_TYPE, CropImageActivity.TYPE_PAGE_ACCOUNT_CAMERA); // 없어도됨
                     startActivityForResult(intent, CROP_IMG_REQUEST_CODE);
                 }
                 break;

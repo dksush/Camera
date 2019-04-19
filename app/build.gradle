@@ -10,10 +10,25 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+
+
+//    signingConfigs {
+//        config {
+//            keyAlias 'dksush'
+//            keyPassword 'ghgh5425'
+//            storeFile file('key/dksush.keystore')
+//            storePassword 'ghgh5425'
+//        }
+//    }
+
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable true
+//            signingConfig signingConfigs.config
         }
     }
     dataBinding {
@@ -31,5 +46,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     //crop image
-    implementation 'com.theartofdev.edmodo:android-image-cropper:2.3.+'
+    api 'com.theartofdev.edmodo:android-image-cropper:2.7.0'
+
 }
