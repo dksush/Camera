@@ -2,11 +2,15 @@ package com.example.camera;
 
 
 import android.Manifest;
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.annotation.TargetApi;
-import android.content.Context;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -21,8 +25,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.DecelerateInterpolator;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 
 public class MainActivity extends AppCompatActivity {
@@ -74,11 +81,60 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.image);
         startAfterAuthorityCheck(); // 권한체크.
+
+
+        ObjectAnimator animator = ObjectAnimator.ofFloat(imageView, "y", 0, 3);
+        animator.setInterpolator(new DecelerateInterpolator());
+        animator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+
+
+    }
+
+
+    public void dialog(View view){
+        Log.v("눌린다","ㅇ");
+        DialogTest.dialog(new DialogTest.ClickListener() {
+            @Override
+            public void hungry(Dialog dialog) {
+                Toast.makeText(MainActivity.this, "졸려", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void sleep(Dialog dialog) {
+                Toast.makeText(MainActivity.this, "배고파", Toast.LENGTH_SHORT).show();
+
+            }
+        }).show(getSupportFragmentManager(),"ff");
     }
 
 
 
+
+
     public void gallery(View view){
+//        Intent intent = new Intent(MainActivity.this, Main2Activity.class);
+  //      startActivity(intent);
+
         int permissionCheck;
         permissionCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
@@ -98,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
-        //dialog.dismiss();
+       // dialog.dismiss();
     }
 
 
@@ -190,15 +246,18 @@ public class MainActivity extends AppCompatActivity {
                     fileSize = (int) file.length();
                     String[] extension = mPhotoPath.split("[.]");
                     exName = extension[extension.length-1];
-                    //Util.d("파일 사이즈 : ", String.valueOf(file.length()));
-                    //Util.d("파일 경로 : ", mPhotoPath);
-                    //Util.d("파일 확장자 : ", exName);
-                   // requestUpdatePhoto(fileSize, exName); // 서버에 올리기.
+                    Log.v("파일 사이즈 : ", String.valueOf(file.length()));
+                    Log.v("파일 경로 : ", mPhotoPath);
+                    Log.v("파일 확장자 : ", exName);
+                    requestUpdatePhoto(fileSize, exName); // 서버에 올리기.
                 }
 
                 break;
 
         }
+        //그런데 JPEG로 변환 해야할 의무사항이 있나요? 그냥 PNG로 압축해도 되지 않나요>?
+        //                JEPG 로 받아와서 PNG로 변환해서 보여주거나.  JPEG로 올려서 PNG로 받아와도 되는데. (단 후자는 서버에서 변환 해줘야함)
+        //        전자는 클라이언트에서 변환이 필요하고. 메모리관리를 잘해야해요.
 
         super.onActivityResult(requestCode, resultCode, data);
     }
@@ -207,7 +266,26 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+    public void requestUpdatePhoto(final int fileSize, String exName){
+        /*
+        Bitmap -> byte :  비트맵 객체(이미지)를 디비에 저장하는 방법 중 하나.
+        비트맵 >
+        - 압축되지 않은 이미지 전체 데이터를 저장 및 관리하는 클래스
+        - Png, jpeg 는 원본이미지(비트맵)을 압축(인코딩) 하여 저장하는 것.
+        - Png,jpeg  파일을 압축해제(디코딩).
+        */
 
+        Bitmap bitmap = BitmapFactory.decodeFile(mPhotoPath);// 경로를 입력하면, 로컬에 있는 이미지를 비트맵 형태로 읽어온다.
+        ByteArrayOutputStream stream = new ByteArrayOutputStream(); // 비트맵을 바이트로 바꿔 내보내기 위한 스트림 생성.
+        bitmap.compress(Bitmap.CompressFormat.JPEG,100, stream); // jpeg로 손실압축하고(압축률이 좋고 속도가 빠르다) 그걸 stream 객체에 넣는다. 서버에서 png로 전환해서 클라에 쏴줄 수 있다.
+        byte[] bytes = stream.toByteArray(); // stream 을 바이트배열로 전환. 이걸 서버로 전송.
+
+
+
+
+        // 레트로핏 코드 생략.
+
+    }
 
 
 
@@ -303,5 +381,9 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return true;
-    }
+    }//  device file explorer 에서 원하는 기기 선택후, 저장소(storeage) 에서 self - primary - apk 에 넣으면 된다.
+    // 베이스 액티비티, 엑소 플레이어, 리사이클러뷰 풋터 해더,
+
+
+
 }
