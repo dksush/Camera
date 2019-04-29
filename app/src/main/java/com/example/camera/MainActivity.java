@@ -32,7 +32,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     private int currentVersionCode = 0;
     private static final int PERMISSIONS_LIBRARY_READ_STORAGE=52;
     private static final int READ_REQUEST_LIBRARY = 42;
