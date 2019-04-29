@@ -282,7 +282,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
         // 레트로핏 코드 생략.
 
     }
